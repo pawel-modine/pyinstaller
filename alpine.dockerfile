@@ -17,7 +17,7 @@
 # runtime and test dependencies - no C compiler or dev packages. Once other packages start shipping musl compatible
 # wheels, most or possibly all of the build half will be safely removable.
 
-FROM python:alpine AS wheel-factory
+FROM python:3.13.0rc1-alpine3.20 AS wheel-factory
 
 # Install a C compiler.
 RUN apk add musl-dev gcc
@@ -41,7 +41,7 @@ COPY PyInstaller PyInstaller
 RUN python setup.py -qqq bdist_wheel -d wheels
 
 
-FROM python:alpine
+FROM python:3.13.0rc1-alpine3.20
 
 CMD ash
 WORKDIR /io
